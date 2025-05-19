@@ -1,0 +1,31 @@
+
+
+<div class="form-bg    " dir="rtl">
+  <div class="container" style="padding-top:8%;" >
+    <div class="row justify-content-center">
+      <div class="col-lg-offset-3   mt-5 col-lg-6 col-md-offset-2 col-md-8">
+        <div class="form-container">
+          <div class="form-icon">
+              <img src="assets/img/logo.png" style="width: 150px;height: 150px">
+
+<!--            <span class="signup"><a href="">Don't have account? Signup</a></span>-->
+          </div>
+          <form class="form-horizontal"  (submit)="onSubmit()">
+            <h3 class="title">تسجيل الدخول</h3>
+            <div class="form-group">
+              <span class="input-icon"><i class="pi pi-user"></i></span>
+              <input pInputText [(ngModel)]="username" name="userName" id="userName" class="form-control" type="text" placeholder="اسم المستخدم">
+            </div>
+            <div class="form-group">
+              <span class="input-icon"><i class="pi pi-lock"></i></span>
+              <input pInputText [(ngModel)]="password" name="password" id="password" class="form-control" type="password" placeholder="القن السري">
+            </div>
+            <button class="btn signin">دخول</button>
+            <span class="forgot-pass text-danger">{{error}}</span>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
