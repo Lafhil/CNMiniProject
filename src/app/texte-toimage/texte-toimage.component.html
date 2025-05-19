@@ -1,0 +1,33 @@
+<div class="layout-main-container m-4 p-2">
+  <div class="layout-main m-0 p-0">
+    <div class="col-12 xs:col-1">
+      <div class="row m-0 p-0">
+        <div class=" md:col-12 xl:col-12 p-0 mr-4 ">
+          <p-card header="Transsmission" class=" items-stretch mb-4 ">
+            <div class="card-body">
+
+              <div >
+                <p-floatLabel >
+                  <textarea pInputTextarea id="on_label"  rows="2" style="resize: none" [(ngModel)] ="text.text" class="h-full w-100 items-stretch"></textarea>
+                  <label for="on_label">Message de transsmition </label>
+                </p-floatLabel>
+                <div >
+
+                  <img [src]="image64" alt="Image originale" style="max-width: 300px;">
+
+                </div>
+              </div>
+
+            </div>
+            <div class="card-footer mt-4">
+              <p-button label="Envoyer" severity="success" icon="pi pi-send" (click)="sendTexte()" />
+            </div>
+          </p-card>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+

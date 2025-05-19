@@ -1,0 +1,83 @@
+<div class="layout-main-container m-4 p-2">
+  <div class="layout-main m-0 p-0">
+   <div class="col-12 xs:col-1">
+     <div class="row m-0 p-0">
+     <div class=" md:col-12 xl:col-5 p-0 mr-4 ">
+       <p-card header="Transsmission" class=" items-stretch mb-4 ">
+         <div class="card-body">
+           <div class="flex justify-center mb-4">
+             <form [formGroup]="mygroup">
+             <p-selectButton formControlName="select" [options]="justifyOptions" (click)="init()"  optionValue="justify" [(ngModel)]="transmissionInput.data_type" optionLabel="justify">
+               <ng-template #item let-item>
+                 <i [class]="item.icon"></i>
+               </ng-template>
+             </p-selectButton>
+             </form>
+           </div>
+        <div >
+         <p-floatLabel *ngIf="transmissionInput.data_type=='texte'">
+           <textarea pInputTextarea id="on_label"  rows="2" style="resize: none" [(ngModel)] =transmissionInput.data class="h-full w-100 items-stretch"></textarea>
+           <label for="on_label">Message de transsmition </label>
+         </p-floatLabel>
+          <div *ngIf="transmissionInput.data_type=='image'">
+
+            <img [src]="originalImageBase64" alt="Image originale" style="max-width: 300px;">
+          <p-fileUpload #fu mode="basic" chooseLabel="Choose"
+                        chooseIcon="pi pi-upload" name="demo[]"
+                        url="https://www.primefaces.org/cdn/api/upload.php"
+                        accept="image/*" maxFileSize="1000000" (onSelect)="onUpload($event)" (onUpload)="onUpload($event)" />
+
+          <p-button label="Upload" (onClick)="fu.upload()" severity="secondary" />
+          </div>
+        </div>
+         <div  class="mb-4 col-12 row">
+
+           <input  class="col-2" type="text" pInputText [(ngModel)]="transmissionInput.snr_db" />
+             <p-slider  [(ngModel)]="transmissionInput.snr_db" class="col-9 mt-2 ml-2" />
+
+         </div>
+           <div class="flex flex-wrap gap-4">
+             <div class="flex items-center">
+               <p-radioButton name="mod" value="bpsl" [(ngModel)]="transmissionInput.modulation" id="bpskrad" />
+               <label for="bpskrad" class="ml-2">Modulation BPSK</label>
+             </div>
+             <div class="flex items-center">
+               <p-radioButton name="mod" value="qpsk" [(ngModel)]="transmissionInput.modulation" id="qpskrad" />
+               <label for="qpskrad" class="ml-2">Modulation QPSK</label>
+             </div>
+
+           </div>
+         <div class="flex items-center">
+           <p-checkbox inputId="ingredient1" [(ngModel)]="manshester" [binary]="true"  />
+           <label for="ingredient1" class="mt-1"> Manshester </label>
+         </div>
+         <div class="flex items-center">
+           <p-checkbox inputId="ingredient2" [(ngModel)]="filter" [binary]="true"  />
+           <label for="ingredient2" class="mt-1"> Flitre </label>
+         </div>
+         </div>
+         <div class="card-footer mt-4">
+         <p-button label="Envoyer" severity="success" icon="pi pi-send" (click)="sendMessage()" />
+         </div>
+       </p-card>
+
+     </div>
+     <div class="md:col-12 xl:col-6 m-0 p-0 ">
+       <p-card class="items-stretch  h-50 m-0" >
+         <div *ngIf="transmissionOutput">
+           <div *ngIf="transmissionInput.data_type=='texte'">
+           <p><strong>Message reçu :</strong> {{ transmissionOutput.received_data }}</p>
+           </div>
+           <div *ngIf="receivedImageBase64">
+             <img [src]="receivedImageBase64" alt="Image reçue" style="max-width: 300px;">
+           </div>
+           <p><strong>BER :</strong> {{ transmissionOutput.ber | percent:'1.2-2' }}</p>
+           <img *ngIf="transmissionOutput.signal_plot" [src]="'data:image/png;base64,' + transmissionOutput.signal_plot" style="width: 100%; max-width: 600px; height: auto;"/>
+<!--           <img *ngIf="result.image_constellation" [src]="'data:image/png;base64,' + result.image_constellation" />-->
+         </div>
+       </p-card>
+     </div>
+     </div>
+   </div>
+  </div>
+</div>
