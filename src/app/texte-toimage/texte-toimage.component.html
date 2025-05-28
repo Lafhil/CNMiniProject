@@ -3,25 +3,61 @@
     <div class="col-12 xs:col-1">
       <div class="row m-0 p-0">
         <div class=" md:col-12 xl:col-12 p-0 mr-4 ">
-          <p-card header="Transsmission" class=" items-stretch mb-4 ">
+          <p-card header="Texte To image" class=" items-stretch mb-4 ">
             <div class="card-body">
+              <div class="position-relative">
+                <!-- Textarea -->
+                <textarea (keydown.enter)="sendTexte()"
+                  pInputTextarea
+                  id="on_label"
+                  placeholder="Écrire ton texte ici..."
+                  rows="2"
+                  style="resize: none;"
+                  [(ngModel)]="text.text"
+                  class="form-control pr-5">
+  </textarea>
+
+                <!-- Bouton positionné à l'intérieur -->
+                <button
+                  pButton
+                  type="button"
+                  icon="pi pi-send"
+                  class="position-absolute top-50 end-0 translate-middle-y me-2"
+                  [rounded]="true"
+                  severity="success"
+                  (click)="sendTexte()" >
+                </button>
+              </div>
 
               <div >
-                <p-floatLabel >
-                  <textarea pInputTextarea id="on_label"  rows="2" style="resize: none" [(ngModel)] ="text.text" class="h-full w-100 items-stretch"></textarea>
-                  <label for="on_label">Message de transsmition </label>
-                </p-floatLabel>
-                <div >
 
-                  <img [src]="image64" alt="Image originale" style="max-width: 300px;">
+<!--                <div class="flex-between ">-->
+<!--                  <div class=" d-flex z-1 p-3">-->
+<!--                    <p-button label="" class= "" [rounded]="true" severity="success" icon="pi pi-send" (click)="sendTexte()" />-->
+<!--                  </div>-->
+<!--&lt;!&ndash;                  <p-inputGroup class="d-flex flex-row bd-highlight">&ndash;&gt;-->
+
+<!--                  <textarea pInputTextarea id="on_label"  placeholder="Ecrire ton Texte ici...." rows="2" style="resize: none" [(ngModel)] ="text.text" class="h-full w-100 pl-8 "></textarea>-->
+
+
+<!--&lt;!&ndash;                    </p-inputGroup>&ndash;&gt;-->
+<!--                </div>-->
+                <div class="card h-full mt-4 d-flex flex-column justify-content-center align-items-center text-center" *ngIf="loding || image64">
+<!--                  <p-progressSpinner ariaLabel="loading" />-->
+                  <p-image src="assets/img/prg1.webp" width="350" *ngIf="loding"></p-image>
+                  <div *ngIf="image64 && !loding" >
+                  <p-image [src]="image64.image" alt="Image" width="400" [preview]="true" />
+                  </div>
+<!--                  <img [src]="image64.image" alt="Image originale" >-->
 
                 </div>
               </div>
 
             </div>
-            <div class="card-footer mt-4">
-              <p-button label="Envoyer" severity="success" icon="pi pi-send" (click)="sendTexte()" />
-            </div>
+<!--            <div class="card-footer mt-4">-->
+<!--              <p-button label="Envoyer" severity="success" icon="pi pi-send" (click)="sendTexte()" />-->
+<!--            </div>-->
+
           </p-card>
 
         </div>

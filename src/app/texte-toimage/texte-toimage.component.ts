@@ -13,6 +13,10 @@ import {SelectButtonModule} from "primeng/selectbutton";
 import {SliderModule} from "primeng/slider";
 import {TexteToImageService} from "../services/texte-to-image.service";
 import {ReceivedImage, TextPrompt} from "../model/model";
+import {InputGroupAddonModule} from "primeng/inputgroupaddon";
+import {InputGroupModule} from "primeng/inputgroup";
+import {ImageModule} from "primeng/image";
+import {ProgressSpinnerModule} from "primeng/progressspinner";
 
 @Component({
   selector: 'app-texte-toimage',
@@ -31,7 +35,11 @@ import {ReceivedImage, TextPrompt} from "../model/model";
     ReactiveFormsModule,
     SelectButtonModule,
     SliderModule,
-    FormsModule
+    FormsModule,
+    InputGroupAddonModule,
+    InputGroupModule,
+    ImageModule,
+    ProgressSpinnerModule
   ],
   templateUrl: './texte-toimage.component.html',
   styleUrl: './texte-toimage.component.css'
@@ -39,13 +47,20 @@ import {ReceivedImage, TextPrompt} from "../model/model";
 export class TexteToimageComponent {
   text:TextPrompt=new TextPrompt()
   image64!:ReceivedImage
+  loding: boolean=false;
   constructor(private txtToimageServ:TexteToImageService) {
   }
   sendTexte(){
+    this.loding=true
     if(this.text){
       this.text.category="animal"
       console.log(this.text)
-      this.txtToimageServ.sendTexte(this.text).subscribe(res=>this.image64=res)
+      this.txtToimageServ.sendTexte(this.text).subscribe(res=> {
+        this.image64 = res
+        this.image64.image='data:image/png;base64,'+this.image64.image
+        this.loding=false
+        console.log(res.image)
+      })
     }
   }
 

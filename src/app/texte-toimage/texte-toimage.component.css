@@ -1,0 +1,10 @@
+.prompt-input-card .commit[data-v-5bcbdec7] {
+  align-items: center;
+  border-radius: .25rem;
+  cursor: pointer;
+  display: flex
+;
+  overflow: hidden;
+  transition: all .2s ease-in-out;
+  z-index: 1;
+}

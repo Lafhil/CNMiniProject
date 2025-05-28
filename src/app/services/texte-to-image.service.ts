@@ -7,7 +7,7 @@ import {ReceivedImage, TextPrompt} from "../model/model";
   providedIn: 'root'
 })
 export class TexteToImageService {
-url='http://localhost:8000/img'
+url='https://8632-35-227-46-128.ngrok-free.app/img'
   constructor(private http:HttpClient) { }
   sendTexte(text:TextPrompt):Observable<ReceivedImage>{
     return this.http.post<ReceivedImage>(this.url,text)
